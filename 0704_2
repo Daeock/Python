@@ -1,0 +1,41 @@
+# Jupyter Tutorial
+
+## 1. What is Jupyter Notebook?
+## 2. Hedding & Description
+## 3. Live Code Example
+## 4. Embedded code
+## 5. Equations
+## 6. Visualization
+### 6.1 Image
+### 6.2 Video
+### 6.3 Table
+### 6.4 Chart
+## 7. Performance Check
+
+* # 함수설정
+
+def f(x):#들여쓰기 중요(tab 한 번 또는 space바 네 번)
+    return x**(1/3)
+
+f(27)
+
+$e^{i\pi} + 1 = 0$
+
+$$e^x=\sum_{i=o}^Winfty Wfrac{1}{i!}x^i$$
+
+* # Table(여기서부터 Markdown)
+
+|This|is|
+|----|--|
+| a  |table|
+
+|aaaaaaaa|bbbbbbb|
+|--------|-------|
+|--------|ddddddd|
+
+pwd #파일위치 찾기
+
+* # Image
+
+<img src = 'python_logo.png'/>
+

@@ -1,0 +1,128 @@
+print('hello')
+
+Korea Marintime and Ocean University
+
+print('hello')
+
+a=input()
+
+b=input()
+
+c=input()
+
+2+2
+
+4*5
+
+2^4
+
+4^2
+
+type(4.5)
+
+type(3i)
+
+type(a)
+
+type("kmou")
+
+id(a)
+
+5 ** 2
+
+113 // 3
+
+113 % 3
+
+5 ** 2 // 3
+
+5 ** (2 // 3)
+
+5 ** (2 % 3)
+
+print(True)
+
+type(True)
+
+print(True and False)
+
+print (4<3)
+
+print(4 and 3)
+
+a=52345
+b=66
+
+a%b=
+
+result(a%b)
+
+result = a&b
+
+a=52345
+b=66
+result = a%b
+
+print('result')
+
+a+b
+
+a%b
+
+print('a를 b로 나누면 result가 나머지로 남습니다')
+
+a=52345
+b=66
+result=a%b
+print('a를 b로 나누면 result가 나머지로 남습니다')
+
+result = a%b
+
+result
+
+print('result')
+
+5**2
+
+a
+
+[a]
+
+{a}
+
+a={a}
+
+result
+
+print(f"a={a}와 b={b}로 나누었을 때 result={result}가 나머지로 남습니다")
+
+print("a={a}와 b={b}로 나누었을 때 result={result}가 나머지로 남습니다")
+
+f"{a}
+
+print(f{a})
+
+print(f"{a}")
+
+print(f"a= {a}와 b= {b}로 나누었을 때 result={result}가 나머지로 남습니다")
+
+a=52345
+b=66
+result=a%b
+
+result
+
+print(f"a={a}와 b={b}로 나누었을 때 result={result}가 나머지로 남습니다")
+
+print(f"a={a}")
+
+print(a={a})
+
+print(f'a={a}와 b={b}로 나누었을 때 result={result}가 나머지로 남습니다')
+
+ship_handle = 1
+
+ship_handle
+
+print('ㅋㅋ'*5)
+

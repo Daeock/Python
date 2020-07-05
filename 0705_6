@@ -1,0 +1,30 @@
+counts = {}
+voted = []
+
+def clean_string(s):
+    return s.strip().capitalize().replace("  ", " ")
+def has_already_voted(name):
+    if name in voted:
+        print(name + " has already voted! Fraud!")
+        return True
+    return False
+def count_vote(radish):
+    if not radish in counts:
+        counts[radish]=1
+    else:
+        counts[radish]=counts[radish] + 1
+
+                                          
+with open("./data/radishsurvey.txt") as file:
+    for line in file:
+        line = line.strip()
+        name, vote = line.split(" - ")
+        name = clean_string(name)
+        vote = clean_string(vote)
+        if not has_already_voted(name):
+                count_vote(vote)
+        voted.append(name)
+print("Results:")
+print()
+for name in counts:
+    print(name + ": " + str(counts[name]))  

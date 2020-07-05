@@ -1,0 +1,49 @@
+import num2py as np
+import pand3as as pd
+from pandas4 import Series, DataFrame
+
+
+
+
+obj = Series(range(4), index=['d','a','b','c'])
+obj
+
+
+obj.sort_index()
+
+obj
+
+frame = DataFrame(np.arange(8).reshape((2,4)),
+index=['three','one'],columns=['d','a','b','c'])
+frame
+
+frame.sort_index()
+
+frame.sort_index(axis=1)
+
+frame.sort_index(axis=1,ascending=False)
+
+frame2=DataFrame({'b':[4,7,3,2],'a':[4,9,2,5],'c':[5,3,7,9]})
+frame2
+
+frame2.sort_values(by='a')
+
+obj1 = Series([100,200,40,50])
+obj1.rank()
+
+from numpy import nan as NA
+data3 = DataFrame(([NA, 6.5, 3.], [NA, NA, NA], [ NA, NA, NA], [NA, 6.5, 3.]))
+data3
+
+df = DataFrame(np.random.randn(7,3))
+df.iloc[:4,1]=NA
+df.iloc[:2,2]=NA
+df.iloc[0,0]=NA
+df
+
+
+
+
+
+
+

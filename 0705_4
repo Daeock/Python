@@ -1,0 +1,55 @@
+# 리스트연습
+- 리스트 : 임의의 데이터 항목들을 담을 수 있다.
+* mutablee Object(변경가능)
+* empty 리스트 생성
+* 리스트에 새로운 항목을 추가
+* 순서 정보 유지
+
+shopping_list = []
+shopping_list
+
+shopping_list.append("milk")
+shopping_list.append("cheese")
+shopping_list.append("bread")
+
+shopping_list
+
+shopping_list.remove("milk")
+shopping_list
+
+for item in shopping_list:
+    print(item)
+
+if "milk" in shopping_list:
+    print("Delicious!")
+if "eggs" not in shopping_list:
+    print("Well we can't have that!")
+shopping_list.append("eggs")    
+
+shopping_list
+
+if "milk" not in shopping_list:
+    print("Delicious!")
+if "eggs" in shopping_list:
+    print("Well we can't have that!")
+
+foods = {}
+foods["banana"] = "A delicious and tasty treat!"
+foods["dirt"] = "Not delicious. Not tasty. DO NOT EAT!"
+foods
+
+foods["banana"]
+
+if "cheese" in foods:
+    print("Cheese is one of the known foods!")
+else:
+    print("No cheese")
+
+del foods["dirt"]
+foods
+
+foods
+
+foods["banana"]
+
+foods["dirt"]

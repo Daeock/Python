@@ -1,0 +1,108 @@
+# 1. 예제 20000초를 시간 분 초로 나타내기
+
+a=20000 //60
+second = 20000 %60
+print (a, second)
+
+hours = a // 60
+min = a % 60
+print (hours, min, second)
+
+print('20000초는', hours,'시간', min, '분', second, '초입니다')
+
+# 2. 가로3, 세로4일 때 대각서의 길이 구하기
+
+x=3
+y=4
+l=((x**2+y**2))**(0.5)
+result=l
+print(result)
+
+b=3
+c=4
+def pta():
+    return ((b**2+c**2)**0.5)
+pta
+
+# 3. 리스트에 있는 숫자들의 중앙값 구하기
+
+list1 = [7, 9, 14]
+list2 = [24, 31, 35, 49]
+list3 = [17, 37, 37, 47, 57]
+
+m=len(list1)
+o=len(list2)
+p=len(list3)
+
+def finding(x):
+    n=len(x)
+    if n%2==1:
+        result=x [int((n-1)/2)]
+    else:
+        result=(x[int(n/2)-1]+x[int(n/2)])/2
+    return result   
+
+finding(list1) 
+
+# 4. 리스트에 있는 숫자들의 평균 구하기
+
+list4 = [4, 6, 9]
+list5 = [11, 17, 20, 24]
+list6 = [26, 33, 45, 51, 60]
+
+def q:
+    q=sum(list(x))
+
+print(sum(list4)/len(list1))
+print(sum(list5)/len(list1))
+print(sum(list6)/len(list1))
+
+# 5. 양의 정수를 입력받고 숫자의 자릿수를 출력하는 프로그램
+
+a=1
+b=242
+c=31523
+
+print(len(str(a)))
+print(len(str(b)))
+print(len(str(c)))
+
+def o(x):
+    m=len(str(x))
+    print(m, '자리')
+
+o(152324)
+
+# 6. 어떤 집단의 평균값, 중간값, 최빈값 구하기
+
+import numpy as np
+x= [100, 100, 200, 400, 500]
+
+print(np.mean(x))
+print(np.median(x))
+
+from scipy.stats import mode
+print(mode(x))
+
+# arange()와 linspace()의 차이점
+
+import numpy as np
+x=np.arange(0, 10, 2)
+y=np.linspace(0, 10, 5)
+
+x
+
+y
+
+# 7. 균등분포와 정규분포
+
+import numpy as np
+a=np.random.rand(5)
+b=np.random.randn(5)
+
+a
+
+b
+
+a는 (0,1)구간의 균등분포의 랜덤 숫자를 발생시키는 함수
+b는 평균값이 0, 표준편차가 1인 정규부포의 숫자를 발생시키는 함수

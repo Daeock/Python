@@ -1,0 +1,221 @@
+import csv
+f=open("./data/coffee.csv")
+for row in csv.reader(f):
+    print(row)
+
+import os
+os.getcwd()
+
+import pandas as pd
+pd.read_csv('data/coffee.csv', nrows=10)
+
+import csv
+f=open('./data/airports.txt')
+for row in csv.reader(f):
+    print(row[1])
+
+f=open('./data/airports.txt')
+for row in csv.reader(f):
+    if row[3]=="Australia" or row[3]=="Russia":
+        print(row[1])
+
+!curl https://raw.githubusercontent.com/jpatokal/openflights/master/data/airpasfasfdasf123.dat
+
+import os
+os.getcwd()
+
+!curl https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat -o./data/aiasdfasdf.txt
+
+pwd()
+
+import csv
+f=open("./data/airports2.txt", encoding = 'utf-8' )
+for row in csv.reader(f):
+    print(row[1])
+
+!curl https://raw.githubusercontent.com/jpatokal/openflights/master/data/routes.dat -o./data/routes.txt
+
+latitudes = {}
+longitudes = {}
+f=open("./data/airports.txt")
+for row in csv.reader(f):
+    airport_id = row[0]
+    latitudes[airport_id] = float(row[6])
+    longitudes[airport_id] = float(row[7])
+latitudes    
+
+!pip install geopy
+distances = []
+from geopy.distance import great_circle, geodesic
+f=open("./data/routes.txt")
+for row in csv.reader(f):
+    source_airport = row[3]
+    dest_airport = row[5]
+    if source_airport in latitudes and dest_airport in latitudes:
+        source_lat=latitudes[source_airport]
+        source_long=longitudes[source_airport]
+        dest_lat=latitudes[dest_airport]
+        dest_long=longitudes[dest_airport]
+    distances.append(great_circle((source_lat,source_long),(dest_lat,dest_long)).km)        
+
+import matplotlib.pyplot as plt
+plt.hist(distances, 100, facecolor='b')
+plt.xlabel("Distance (km)")
+plt.ylabel("Number of flights")
+
+from datetime import datetime
+now=datetime.now()
+print (now)
+print (now.year)
+print (now.month)
+print (now.day)
+
+print (str(now.month) + "/" + str(now.day) + "/" + str(now.year))
+
+print (str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
+
+import pandas as pd
+
+df_hdays = pd.read_excel('https://bit.ly/301yFCq')
+df_hdays
+
+hdays = df_hdays['일자 및 요일'].str.extract('(\d{4}-\d{2}-\d{2})', expand=False)
+hdays = pd.to_datetime(hdays)
+hdays.name = '날짜'
+hdays
+
+mdays=pd.date_range('2020-01-01', '2020-12-31')
+mdays
+
+mdays=pd.date_range('2020-01-01', '2020-12-31', freq='B')
+mdays
+
+mdays=mdays.drop(hdays)
+mdays
+
+data = {'values' : range(1,32)}
+df_sample = pd.DataFrame(data, index=pd.date_range('2020-05-01','2020-05-31'))
+df_sample
+
+df_mdays = pd.DataFrame(index=mdays)
+df=pd.merge(df_sample, df_mdays,
+right_index=True, left_index=True)
+df
+
+data = {'values' : range(1,31)}
+df_sample6 = pd.DataFrame(data, index=pd.date_range('2020-06-01','2020-06-30'))
+df_sample6
+
+df_mdays = pd.DataFrame(index=mdays)
+df=pd.merge(df_sample6, df_mdays,
+right_index=True, left_index=True)
+df
+
+# 스트레이핑, 크롤링
+- Scraping : 웹사이트의 특정 정보를 추출하는 것. 웹 데이터의 구조 분석이 필요
+- 로그인이 필요한 경우가 많다.
+- Crawling : 프로그램이 웹사이트를 정기적으로 돌며 정보를 추출하는 것(이러한 프로그램을 크롤러, 스파이더라고 한다)
+
+# urllib 사용법?
+- url 관련 데이터를 처리하는 라이브러리
+
+import re
+import requests
+re.findall('<span class="ah_k">(.*?)</span>', requests.get('http://naver.com').text)[:20]
+
+import json, requests
+from pandas.io.json import json_normalize
+
+r=requests.get('http://rank.search.naver.com/rank.js')
+json_normalize(json.loads(r.text), ['data','data'])
+
+import urllib.request
+url = "http://uta.pw/shodou/img/28/214.png"
+savename="data/test.png"
+urllib.request.urlretrieve(url, savename)
+
+mem = urllib.request.urlopen(url).read()
+with open(savename, "wb") as f:
+    f.write(mem)
+    
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+%matplotlib inline
+plt.imshow(mpimg.imread(savename))
+
+url = "http://api.aoikujira.com/ip/ini"
+res = urllib.request.urlopen(url)
+data = res.read()
+text = data.decode("utf-8")
+print(text)
+print(data)
+
+import urllib.parse
+API = "http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp"
+values={
+    'stdId':'109'
+}
+params=urllib.parse.urlencode(values)
+url=API + "?" + params
+print("url=",url)
+data=urllib.request.urlopen(url).read()
+text=data.decode("utf-8")
+print(text)
+
+# 여기서부터 스트레이핑
+- 웹에서 원하는 정보를 추출하는 것
+- HTML과 XML 문서에서 정보를 추출할 수 있다
+
+!pip install BeautifulSoup4 
+# beautifulsoup4 기억하기
+
+from bs4 import BeautifulSoup
+html = """
+<html><body>
+<h1> 파이썬으로 웹문서 읽기 </h1>
+<p> 페이지 분석 기능 </p>
+<p> 페이지 정렬 </p>
+</body></html>
+"""
+soup = BeautifulSoup(html, 'html.parser')
+h1 = soup.html.body.h1
+p1 = soup.html.body.p
+p2 = p1.next_sibling.next_sibling
+
+print("h1="+ h1.string)
+print("p="+ p1.string)
+print("p="+ p2.string)
+
+html = """
+<html><body>
+<h1 id="title"> 파이썬으로 웹문서 읽기 </h1>
+<p id="body"> 페이지 분석기능 </p>
+<p> 페이지 정렬 </p>
+</body></html>
+"""
+soup = BeautifulSoup(html, 'html.parser')
+title = soup.find(id='title')
+body = soup.find(id="body")
+print ("body="+ body.string)
+print ('title=' + title.string)
+
+import requests
+area_code = '110000000'
+url='http://price.joinsland.joins.com/ajax/area_search.asp?div=MCODE&areaCode=' + area_code
+r=requests.get(url)
+print(r.text)
+
+import pandas as pd
+def get_areacode():
+    df_areacode = pd.read_csv('https://goo.gl/tM6r3v', sep='\t', dtype={'법정동코드':str, '법정동명':str})
+    df_areacode = df_areacode[['법정동코드', '법정동명']]
+    return df_areacode
+def get_province():
+    df_areacode = get_areacode()
+    df_province = df_areacode[df_areacode['법정동코드'].str.contains('\d{2}0{8}|36110{6}')]
+    return df_province
+df_areacode = get_areacode()
+df_province = get_province()
+df_province
+
+df_areacode.head(10)

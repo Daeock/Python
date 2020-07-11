@@ -1,0 +1,92 @@
+from pandas import DataFrame, Series
+import pandas as pd
+
+f=open("test.csv","w")
+f.write("1,2,3,4,5 \n")
+f.close()
+!type cast.csv
+
+with open("test.csv", "a") as f:
+    f.write("1,2,3,4,5 \n")
+    f.write("1,2,3,4,5 \n")
+!type cast.csv    
+
+with open("test.csv","w") as f:
+    f.write("a,b,c,d,message \n")
+    f.write("1,2,3,4,hello \n")
+    f.write("5,6,7,8,world \n")
+    f.write("9,10,11,12,foo \n")
+!type test.csv    
+
+pd.read_csv("test.csv")
+
+pd.read_csv('test.csv', header=None)
+
+pd.read_csv('test.csv', header=1)
+
+pd.read_csv('test.csv',
+names=['A','B','C','D','E'])
+
+pd.read_csv('test.csv',nrows=2)
+
+a=pd.read_csv('test.csv')
+a.to_csv('output.csv')
+!type output.csv
+
+a
+
+# 디렉토리 관리
+- getcwd() : 현재 디렉토리 위치
+- chdir() : 디렉토리 이동
+- listdir : 현재 디렉토리 하의 모든 디렉토리, 파일들을 출력
+- mkdir() : 디렉토리 생성
+- rmdir() : 디렉토리 제거
+- rename : 디렉토리/파일 이름을 수정
+- remove() : 파일 삭제
+
+import os
+os.getcwd()
+
+os.getcwd()
+
+os.rename('new_one','test.csv')
+
+os.listdir()
+
+os.chdir('C:\Intel')
+
+os.getcwd()
+
+os.chdir('C:/Users/Administrator/Desktop/mypython')
+
+os.getcwd()
+
+os.listdir()
+
+os.mkdir('test')
+os.rename('test','new_one')
+os.remove('output.csv')
+os.rmdir('new_one')
+
+# json 형식 파일 read/write
+- json 형식 : Web programming에서 자주 사용
+    * java script object notation
+    * json 객체 : (객체:속성) 형태의 내용들을 """ """로 묶어서 표현
+    * json.loads() : json 형식의 string 객체를 파이썬 딕셔너리 형식으로 변경
+    * json,dumps() : 파이썬 딕셔러니 형식 객체를 json 형식의 string으로 변경
+
+import json
+
+obj = """
+{
+    "name": "Kim",
+    "places_lived": ["Seoul", "Korea"],
+    "pet":null, "siblings":[{"name":"Scott","age":25,"pet":"Zuko"}]
+}
+"""
+
+result = json.loads(obj)
+result
+
+asjson = json.dumps(result)
+asjson

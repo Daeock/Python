@@ -106,3 +106,17 @@ b
 
 a는 (0,1)구간의 균등분포의 랜덤 숫자를 발생시키는 함수
 b는 평균값이 0, 표준편차가 1인 정규부포의 숫자를 발생시키는 함수
+
+import numpy as np
+import matplotlib.pyplot as plt
+x=np.linspace(0.0, 5.0, 100)
+y=np.cos(2*np.pi*x) + np.exp(-x)
+
+plt.plot(x,y,'k')
+plt.title('Damped exponential decay', fontdict=font)
+plt.text(2, 0.65, r'$cos(2\pi t) \exp(-t)$', fontdict=font)
+
+plt.xlabel('time(s)', fontdict=font)
+plt.ylabel('voltage(mV)', fontdict=font)
+
+plt.subplots_adjust(left=0.15)

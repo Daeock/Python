@@ -1,0 +1,124 @@
+with open("./data/radishsurvey.txt") as file:
+    for line in file:
+        line=line.strip()
+        parts=line.split(" - ")
+        name=parts[0]
+        vote=parts[1]
+        print(name + " voted for " + vote)
+
+line=line.strip()
+line
+
+
+parts = line.split(" - ")
+parts
+
+with open("./data/radishsurvey.txt") as file:
+    for line in file:
+        line=line.strip()
+        parts=line.split(" - ")
+        name, vote = parts
+        if vote == "White Icicle":
+            print(name + " lies White Icicle!")
+
+print("Counting votes for White Icicle...")
+count=0
+with open("./data/radishsurvey.txt") as file:
+    for line in file:
+        line=line.strip()
+        parts=line.split(" - ")
+        name=parts[0]
+        vote=parts[1]
+        if vote == "White Icicle":
+            count=count+1
+print(count)     
+
+counts = {}
+with open("./data/radishsurvey.txt") as file:
+    for line in file:
+        line=line.strip()
+        parts=line.split(" - ")
+        name=parts[0]
+        vote=parts[1]
+        if vote not in counts:
+            counts[vote] = 1
+        else:
+            counts[vote] = counts[vote] + 1
+print(counts)           
+
+for name in counts:
+    count=counts[name]
+    print(name + ":" + str(count))
+
+with open("./data/radishsurvey.txt") as file:
+    for line in file:
+        line=line.strip()
+        parts=line.split(" - ")
+        name=parts[0]
+        vote=parts[1]
+        vote=vote.strip().capitalize()
+        if not vote in counts:
+            counts[vote]=1
+        else:
+            counts[vote]=counts[vote]+1
+print(counts)            
+
+counts = {}
+voted = []
+def clean_string(s):
+    return s.strip().capitalize().replace("","")
+def has_already_voted(name):
+    if name in voted:
+        print(name + " has already voted! Fraud!")
+        return True
+    return False
+def count_vote(radish):
+    if not radish in counts:
+        counts[radish] = 1
+    else:
+        counts[radish] = counts[radish] + 1
+with open("./data/radishsurvey.txt") as file:
+    for line in file:
+        line=line.strip()
+        parts=line.split(" - ")
+        name=parts[0]
+        vote=parts[1]
+        name=clean_string(name)
+        vote=clean_string(vote)
+        if not has_already_voted(name):
+            count_vote(vote)
+        voted.append(name)
+print("Results:")        
+print()
+for name in counts:
+    print(name + ":" + str(counts[name]))
+
+winner_name = "No winner"
+winner_votes=0
+for name in counts:
+    if counts[name] > winner_votes:
+        winner_votes = counts[name]
+        winner_name = name
+print("The winner is : " + winner_name)        
+
+import numpy as np
+names = []
+votes = []
+for radish in counts:
+    names.append(radish)
+    votes.append(counts[radish])
+
+import matplotlib.pyplot as plt
+x=np.arange(len(counts))
+plt.bar(x, votes)
+plt.xticks(x+0.5, names, rotation=90)
+plt.show()
+
+x=range(5)
+print(x)
+print(x + 0.5)
+
+x=np.arange(5)
+print(x)
+print(x + 0.5)
+

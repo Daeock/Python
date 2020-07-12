@@ -1,0 +1,210 @@
+# Folium 지도데이터를 시각화에 활용하기 위한 좋은 library Folium
+
+- 수집된 디에터를 시각화하는 
+- 그 중에 지도데이터를
+
+pip install folium
+
+import folium
+#131도 52분 10.4초, 북위 37도 14분 26.8초
+map_osm = folium.Map(location=[37.241655, 131.865340], zoom_start=15)
+map_osm
+
+# zoom_start를 사용하면 확대 비율을 정의할 수 있음
+
+stamen = folium.Map(location=[45.5236, -122.6750], zoom_start=13)
+stamen
+
+map_2 = folium.Map(location = [45.5236, -122.6750], titles='stamentoner', zoom_start=13)
+folium.Marker([45.5244, -123.6699], popup='The Waterfront').add_to(map_2)
+folium.CircleMarker([45.5215, -122.6261], radius=50, popup='Laureihuerst Park', color='red', fill_color='#3186cc').add_to(map_2)
+map_2
+
+pwd
+
+import pandas as pd
+
+state_unemployment = './data/US_Unemployment_Oct2012.csv'
+state_data = pd.read_csv(state_unemployment)
+state_data
+
+state_geo = './data/us-states.json'
+map = folium.Map(location = [40, -98], zoom_start=4)
+map.choropleth(geo_data=state_geo, data=state_data,
+              columns=['State', 'Unemployment'],
+              key_on='feature.id',
+              fill_color='YlGn',
+              legend_name='Unemployment Rate (%)')
+map
+
+# 국제 상품 가격 데이터
+
+- 파이썬에서 국제 원자재(금, 은 등)의 가격을 가져와 다루는 방법
+
+pip install pandas_datareader
+
+%matplotlib inline
+import matplotlib.pyplot as plt
+
+plt.rcParams["figure.figsize"] = (14,4)
+plt.rcParams['axes.grid'] = True
+import pandas as pd
+import pandas_datareader as pdr
+
+# https://fred.stlouisfed.org/series/GOLDAMGBD228NLBM
+# https://fred.stlouisfed.org/seires/GOLDPMGBD228NLBM
+df_gold = pdr.DataReader('GOLDAMGBD228NLBM', 'fred', start='2000-01-01')
+print('row count:', len(df_gold))
+df_gold
+
+df_gold.plot()
+
+!curl https://raw.githubusercontent.com/ZubairHussain/Appointment-No-Show-/master/No-show-Issue-Comma-300k.csv -o./data/no_show.csv
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data=pd.read_csv('./data/no_show.csv')
+data
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+data=pd.read_csv('./data/no_show.csv')
+data
+
+data.columns
+
+data.rename(columns={'ApointmentData':'AppointmentData', 'Alcoolism':'Alcoholism', 'Hypertention':'Hypertension', 'Handcap':'Handicap'},
+           inplace=True)
+data.head(5)
+
+data.head(5)
+
+print('Age:',sorted(data.Age.unique()))
+print('Gender:',data.Gender.unique())
+print('DayOfTheWeek:',data.DayOfTheWeek.unique())
+print('Status:',data.Status.unique())
+print('Diabetes:',data.Diabetes.unique())
+print('Alcoholism:',data.Alcoholism.unique())
+print('Hypertension:',data.Hypertension.unique())
+print('Handicap:',data.Handicap.unique())
+print('Smokes:',data.Smokes.unique())
+print('Scholarship:',data.Scholarship.unique())
+print('Tuberculosis:',data.Tuberculosis.unique())
+print('Sms_Reminder:',data.Sms_Reminder.unique())
+print('AwaitngTime',sorted(data.AwaitingTime.unique()))
+
+data = data [(data.Age>=0) & (data.Age <= 100)]
+
+df = pd.crosstab(index=data['Gender'], columns=data.Status).reset_index()
+df['Sum']=pd.DataFrame([((data['Gender']=='F').sum()), ((data['Gender']=='M').sum())])
+df
+
+all_oj=(data['Gender']=='M').sum() + (data['Gender']=='F').sum()
+print("Man:", round((data['Gender']=='M').sum() /all_oj,5)*100, '%')
+print("Woman:", round((data['Gender']=='F').sum() /all_oj,5)*100, '%')
+
+FM = data[(data['Gender']=='F')]
+f_oj=(data['Gender']=='F').sum()
+print("Woman No-Show:", round((FM['Status']=='No-Show').sum() /f_oj,5)*100, '%')
+print("Woman Show-up:", 100-round((FM['Status']== 'No-Show').sum() /f_oj, 5)*100, '%')
+
+MM = data[(data['Gender']=='M')]
+m_oj=(data['Gender']=='M').sum()
+print("Man No-Show:", round((MM['Status']=='No-Show').sum() /m_oj,5)*100, '%')
+print("Man Show-up:", 100-round((MM['Status']== 'No-Show').sum() /m_oj, 5)*100, '%')
+
+df = data[data.Status=='Show-Up']
+range_df = pd.DataFrame()
+range_df['Age']=range(100)
+men=range_df.Age.apply(lambda x:len(df[(df.Age==x) & (df.Gender=='M')]))
+women=range_df.Age.apply(lambda x:len(df[(df.Age==x) & (df.Gender=='F')]))
+plt.xlabel('Age')
+plt.title('Gender visit the doctor more often')                        
+plt.plot(range(100), men/(data['Gender']=='M').sum(), 'b')
+plt.plot(range(100), women/(data['Gender']=='F').sum(), color='r')                         
+plt.legend(['M', 'F'])                         
+plt.show()                         
+
+men_smoke=range_df.Age.apply(lambda x:
+    len(df[(df.Age == x) & (df.Gender == 'M') & (df.Smokes == 1)]))
+women_smoke=range_df.Age.apply(lambda x:
+    len(df[(df.Age==x) & (df.Gender == 'F') & (df.Smokes==1)]))
+men_tension = range_df.Age.apply(lambda x:
+    len(df[(df.Age == x) & (df.Gender == 'M') & (df.Hypertension == 1)]))
+women_tension = range_df.Age.apply(lambda x:
+    len(df[(df.Age == x) & (df.Hypertension==1)]))
+
+men_Diabetes = range_df.Age.apply(lambda x:
+    len(df[(df.Age == x) & (df.Gender == 'M') & (df.Diabetes == 1)]))
+women_Diabetes = range_df.Age.apply(lambda x:
+    len(df[(df.Age == x) & (df.Gender == 'F') & (df.Diabetes == 1)]))
+
+men_Tuber = range_df.Age.apply(lambda x:
+    len(df[(df.Age == x) & (df.Gender == 'M') & (df.Tuberculosis == 1)]))
+women_Tuber = range_df.Age.apply(lambda x:
+    len(df[(df.Age == x) & (df.Gender == 'F') & (df.Tuberculosis == 1)]))
+
+plt.figure(figsize = (15,15))
+plt.subplot(221)
+plt.plot(range(100), men_smoke/men)
+plt.plot(range(100), women_smoke/women, color='r')
+plt.title('Smoking')
+plt.legend(['M','F'], loc=2)
+plt.xlabel('Age')
+
+plt.subplot(221)
+plt.plot(range(100), men_smoke/men)
+plt.plot(range(100), women_smoke/women, color='r')
+plt.title('Smoking')
+plt.legend(['M','F'], loc=2)
+plt.xlabel('Age')
+
+plt.subplot(222)
+plt.plot(range(100), men_tension/men)
+plt.plot(range(100), women_tension/women, color='r')
+plt.title('Hypertension')
+plt.legend(['M','F'], loc=2)
+plt.xlabel('Age')
+
+plt.subplot(223)
+plt.plot(range(100), men_Diabetes/men)
+plt.plot(range(100), women_Diabetes/women, color='r')
+plt.title('Diabetes')
+plt.legend(['M','F'], loc=2)
+plt.xlabel('Age')
+
+plt.subplot(224)
+plt.plot(range(100), men_Tuber/men)
+plt.plot(range(100), women_Tuber/women, color='r')
+plt.title('Tuberculosis')
+plt.legend(['M','F'], loc=2)
+plt.xlabel('Age')
+
+plt.show()
+
+bins = [0,2,7,14,30,90,180,9999]
+labels = ["Immediate", "Week", "Two weeks", "Month", "Trimester", "Half year", "Forever"]
+wait_period = pd.cut(data.AwaitingTime, bins, labels=labels)
+data['Wait_period'] = wait_period
+df=data[data.Status=='Show-Up']
+wait_df=pd.DataFrame(labels)
+men_wait=wait_df[wait_df.columns[0]].apply(lambda x:
+    len(df[(df.Wait_period ==x) & (df.Gender=='M')]))
+women_wait=wait_df[wait_df.columns[0]].apply(lambda x:
+    len(df[(df.Wait_period ==x) & (df.Gender=='F')]))
+plt.figure(figsize=(10,5))
+plt.bar(range(7), men_wait/len(df[df.Gender=='M']), width=0.5)
+plt.bar(range(7)+0.5*np.ones(len(range(7))),
+        women_wait/len(df[df.Gender=='F']), width=0.5, color='r')
+plt.xticks(range(7) + 0.25*np.ones(len(range(7))), labels)
+plt.title('Wait_period')
+plt.xlabel('Wait_period')
+plt.legend(['M', 'F'])
+plt.show()
+

@@ -1,0 +1,66 @@
+import requests
+from bs4 import BeautifulSoup
+
+headers = {'User-Agent' : 'Mozila/5.0 (Window NT 6.3 : Win64: x64)\
+Apple\eb(it/537.36(KHTML. like Geoko) Chrome/63.0.3239.132 Safari/537.36'}
+
+url='https://datalab.naver.com/keyword/realtimeList.naver?wher=main'
+
+res = requests.get(url,headers = headers)
+soup = BeautifulSoup(res.content, 'html.parser')
+data=soup.findAll('span', 'item_title')
+for item in data:
+    print(item.get_text())
+
+# 두번째방법
+
+rest1=requests.get('https://datalab.naver.com/keyword/realtimeList.naver?wher=main')
+soup1=BeautifulSoup(res.content, 'html.parser')
+data1=soup.findAll('span', 'item_title')
+for item in data1:
+    print(item.get_text())
+
+좀 더 편리한 시각화 도구 - Seaborn
+
+## boxplot
+
+- 데이터를 분석하는 데 있어 그래프를 통한 시각화는 매우 중요하다. 여러 종류의 그래프 중 데이터의 대략적인 분포뿐만 아니라 이상치, 평균치, 중간값, 사분위값, IQR(Inter Quartile Range) 등을 함께 보여주는 그래프
+
+- 참고로 파이썬에서는 Pandas와 seaborn 패키지(모듈)에서 이 기능을 제공하고 있으며 여러 가지 형태의 변형도 가능하다.
+
+import matplotlib.pyplot as plt
+import numpy as np
+%matplotlib inline
+
+import seaborn as sns
+
+x = np.linspace(0, 14, 100)
+y1 = np.sin(x)
+y2 = 2*np.sin(x+0.5)
+y3 = 3*np.sin(x+1.0)
+y4 = 4*np.sin(x+1.5)
+
+plt.figure(figsize=(10,6))
+plt.plot(x, y1, x, y2, x, y3, x, y4)
+plt.show()
+
+tips = sns.load_dataset('tips')
+tips.head()
+
+import matplotlib.pyplot as plt
+import numpy as np
+import seaborn as sns
+
+sns.set_style('whitegrid')
+%matplotlib inline
+
+tips = sns.load_dataset('tips')
+tips
+
+plt.figure(figsize=(8,6))
+sns.boxplot(x='day', y='total_bill', data=tips)
+plt.show()
+
+plt.figure(figsize=(8,6))
+sns.boxplot(x='day', y='total_bill', hue='smoker', data=tips, palette='Set3')
+plt.show()

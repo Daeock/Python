@@ -1,0 +1,24 @@
+# 베이즈 텍스트 분석
+
+## 다루는 내용
+- 메일이 스팸메일인지 아닌지 예측
+
+import pandas as pd
+from matplotlib import pyplot as plt
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import GaussianNB
+from sklearn import metrics
+
+sms=pd.read_csv('data/sms_spam.csv')
+sms.head()
+
+sms.shape
+
+sms['type'].value_counts()
+
+sms_corpus=sms['text']
+vectorizer=CountVectorizer(min_df=10)
+X=vectorizer.fit_transform(sms_corpus)
+X.shape

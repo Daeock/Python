@@ -1,0 +1,50 @@
+from nltk.corpus import names
+import nltk
+nltk.download('names')
+
+labeled_names = ([(name, '남자') for name in names.words('male.txt')] + [(name, '여자') for name in names.words('female.txt')])
+labeled_names[0:10]
+
+def gender_features(word):
+    return {'last_letter':word[-1]}
+gender_features('Sopi')
+
+import random
+random.shuffle(labeled_names,)
+labeled_names[0:10]
+
+featuresets = [(gender_features(n), gender) for (n,gender) in labeled_names]
+featuresets[0:10]
+
+train_set, test_set=featuresets[2000:], featuresets[:2000]
+classifier=nltk.NaiveBayesClassifier.train(train_set)
+classifier.classify(gender_features('Sephipa'))
+
+classifier.show_most_informative_features(5)
+
+print(nltk.classify.accuracy(classifier,test_set))
+
+def gender_features2(name):
+    features = {}
+    features["first_letter"] = name[0].lower()
+    features["last_letter"] = name[-1].lower()
+    features["length"] = len(name)
+    for letter in 'abcdefghijklmnopqrstuvwxyz':
+        features["count({})".format(letter)]=name.lower().count(letter)
+        features["has({})".format(letter)]=(letter in name.lower())
+        return features
+
+gender_features2('Joshua')
+
+gender_features2('Daeock')
+
+labeled_names[0:10]
+
+featuresets = [(gender_features2(n), gender) for (n, gender) in labeled_names]
+featuresets[0:2]
+
+train_set, test_set = featuresets[2000:], featuresets[:2000]
+classifier=nltk.NaiveBayesClassifier.train(train_set)
+print(nltk.classify.accuracy(classifier,test_set))
+
+classifier.show_most_informative_features(100)
